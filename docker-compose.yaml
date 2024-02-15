@@ -8,7 +8,15 @@ services:
     volumes:
         - "rethinkdb-data:/data"
     command: "rethinkdb --bind all --cache-size 2048"
-
+    
+  adb:
+    container_name: adb
+    image: devicefarmer/adb:latest
+    restart: unless-stopped
+    volumes: 
+      - "/dev/bus/usb:/dev/bus/usb"
+    privileged: true
+    
   stf:
     container_name: stf
     image: devicefarmer/stf
@@ -22,7 +30,7 @@ services:
       - STF_ADMIN_EMAIL=
       - STF_ADMIN_NAME=
     restart: unless-stopped
-    command: stf local --allow-remote --adb-host  --public-ip  --provider-min-port 7400 --provider-max-port 7500
+    command: stf local --adb-host  --public-ip  --provider-min-port 7400 --provider-max-port 7500
 
 volumes:
   rethinkdb-data: {}
