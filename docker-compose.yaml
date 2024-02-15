@@ -1,0 +1,28 @@
+version: "3"
+
+services:
+  rethinkdb:
+    container_name: rethinkdb
+    image: rethinkdb:2.4.2
+    restart: unless-stopped
+    volumes:
+        - "rethinkdb-data:/data"
+    command: "rethinkdb --bind all --cache-size 2048"
+
+  stf:
+    container_name: stf
+    image: devicefarmer/stf
+    ports:
+      - "7100:7100"
+      - "7110:7110"
+      - "7400-7500:7400-7500"
+    environment:
+      - TZ='Asia/Tokyo'
+      - RETHINKDB_PORT_28015_TCP=tcp://rethinkdb:28015
+      - STF_ADMIN_EMAIL=
+      - STF_ADMIN_NAME=
+    restart: unless-stopped
+    command: stf local --allow-remote --adb-host  --public-ip  --provider-min-port 7400 --provider-max-port 7500
+
+volumes:
+  rethinkdb-data: {}
