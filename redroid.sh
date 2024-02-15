@@ -13,13 +13,13 @@ curl -fsSL https://get.docker.com | sh
 
 # 运行 Docker 容器
 sudo docker run -itd --privileged \
-    --memory-swappiness=0 \
+    #--memory-swappiness=0 \
     --restart=always \
     --pull always \
-    -v ~/data11:/data \
+    -v ~/data13:/data \
     -p 5555:5555 \
-    --name redroid11 \
-    redroid/redroid:11.0.0-latest \
+    --name redroid13 \
+    redroid/redroid:13.0.0-latest \
     redroid.gpu.mode=guest
 
 
