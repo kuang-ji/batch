@@ -17,10 +17,10 @@ sudo docker run -itd --privileged \
     --memory-swappiness=0 \
     --restart=always \
     --pull always \
-    -v ~/data13:/data \
+    -v ~/data8:/data \
     -p 5555:5555 \
-    --name redroid13 \
-    redroid/redroid:13.0.0-latest \
+    --name redroid8 \
+    redroid/redroid:8.1.0-latest \
     redroid.gpu.mode=guest
 
 
